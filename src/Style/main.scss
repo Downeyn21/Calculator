@@ -2,7 +2,7 @@
 @use './mixin' as *;
 
 .mainContainer {
-    background-color: whitesmoke;
+    background-color: rgb(54, 53, 51);
     border: solid 3px;
     border-radius: 7px;
     width: 400px;
@@ -18,12 +18,44 @@
     height: 100px;
     border: solid;
     @include flex-center;
+
+    input {
+        width: 95%;
+        height: 70%;
+        border-radius: 25px;
+        background-color: rgb(105, 105, 105);
+        pointer-events: none;
+    }
+    input :focus {
+        outline: none;
+    }
 }
 
 .keypadContainer {
-    width: 100%;
-    border: solid;
+    width: 95%;
     flex-grow: 1;
     display: grid;
-    
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 10px;
+
+    button {
+        background-color: grey;
+        border-radius: 5px;
+        font-size: larger;
+    }
+}
+
+.tallKey {
+    grid-row: span 2;
+    background-color: red !important;
+}
+
+.wideKey {
+    grid-column: span 2;
+}
+
+.backKey {
+    background-color: red !important;
 }

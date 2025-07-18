@@ -2,7 +2,10 @@ function Display() {
     return ( 
         <>
             <div className="displayContainer">
-                DISPLAY
+                <input
+                type="text" 
+                readOnly
+            />
             </div>
         </>
     );

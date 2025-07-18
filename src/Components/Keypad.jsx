@@ -5,7 +5,7 @@ function Keypad() {
     const keys = [
         {label: '/'},
         {label: '*'},
-        {label: '<=', colSpan: 2},
+        {label: '<=', className: 'wideKey backKey'},
 
         {label: '7'},
         {label: '8'},
@@ -21,8 +21,8 @@ function Keypad() {
         {label: '2'},
         {label: '3'},
         
-        {label: 'enter', rowSpan: 2},
-        {label: '0', colSpan: 2},
+        {label: 'ENTER', className: 'tallKey'},
+        {label: '0', className: 'wideKey'},
         {label: '.'}
     ]
 
@@ -33,6 +33,7 @@ function Keypad() {
                 {keys.map((key, index) => (
                     <button
                     key={index}
+                    className={key.className || ''}
                     >
                         {key.label}
                     </button>
