@@ -1,6 +1,8 @@
+import { useState } from "react"
 
 
-function Keypad() {
+function Keypad({setDisplayValue}) {
+    const [valueArr, setValueArr] = useState([])
 
     const keys = [
         {label: '/'},
@@ -25,7 +27,16 @@ function Keypad() {
         {label: '0', className: 'wideKey'},
         {label: '.'}
     ]
-
+    
+    function handleChange(key) {
+        let arr = valueArr
+        arr.push(key)
+        setValueArr(arr)
+        let valueString = valueArr.join('')
+        setDisplayValue(valueString)
+        console.log('valueArr => ', valueArr)
+        console.log('valueString => ', valueString)
+    }
 
     return ( 
         <>
@@ -34,6 +45,7 @@ function Keypad() {
                     <button
                     key={index}
                     className={key.className || ''}
+                    onClick={() => {handleChange(key.label)}}
                     >
                         {key.label}
                     </button>
