@@ -1,10 +1,5 @@
 function Display({displayValue}) {
-
-    console.log('useState => ', displayValue)
-
-
     return ( 
-
         <>
             <div className="displayContainer">
                 <input

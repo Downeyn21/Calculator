@@ -14,7 +14,8 @@ function App() {
       // handleChange={handleChange}
     />
       <Keypad 
-      setDisplayValue={setDisplayValue} 
+      setDisplayValue={setDisplayValue}
+      displayValue={displayValue}
     />
     </div>
     </>

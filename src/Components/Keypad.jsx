@@ -1,7 +1,8 @@
 import { useState } from "react"
+import Display from "./Display"
 
 
-function Keypad({setDisplayValue}) {
+function Keypad({setDisplayValue, displayValue}) {
     const [valueArr, setValueArr] = useState([])
 
     const keys = [
@@ -23,20 +24,31 @@ function Keypad({setDisplayValue}) {
         {label: '2'},
         {label: '3'},
         
-        {label: 'ENTER', className: 'tallKey'},
+        {label: 'ENTER', className: 'tallKey', function: () => calculate()},
         {label: '0', className: 'wideKey'},
         {label: '.'}
     ]
     
     function handleChange(key) {
-        let arr = valueArr
-        arr.push(key)
-        setValueArr(arr)
-        let valueString = valueArr.join('')
+        if (key) {
+            console.log();
+            
+        }
+        const newArr = [...valueArr, key]
+        setValueArr(newArr)
+        let valueString = newArr.join('')
         setDisplayValue(valueString)
         console.log('valueArr => ', valueArr)
         console.log('valueString => ', valueString)
     }
+
+    function calculate() {
+        let newValue = eval(displayValue)
+        setDisplayValue(newValue)
+        setValueArr([newValue])
+        console.log(eval(displayValue))
+    }
+
 
     return ( 
         <>
@@ -45,7 +57,8 @@ function Keypad({setDisplayValue}) {
                     <button
                     key={index}
                     className={key.className || ''}
-                    onClick={() => {handleChange(key.label)}}
+                    // if operator then onClick does diff
+                    onClick={() => {key.function ? key.function() : handleChange(key.label)}}
                     >
                         {key.label}
                     </button>
