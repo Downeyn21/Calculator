@@ -8,7 +8,7 @@ function Keypad({setDisplayValue, displayValue}) {
     const keys = [
         {label: '/'},
         {label: '*'},
-        {label: '<=', className: 'wideKey backKey'},
+        {label: '<=', className: 'wideKey backKey', function: () => backKey() },
 
         {label: '7'},
         {label: '8'},
@@ -30,24 +30,24 @@ function Keypad({setDisplayValue, displayValue}) {
     ]
     
     function handleChange(key) {
-        if (key) {
-            console.log();
-            
-        }
+
+
         const newArr = [...valueArr, key]
         setValueArr(newArr)
-        let valueString = newArr.join('')
-        setDisplayValue(valueString)
-        console.log('valueArr => ', valueArr)
-        console.log('valueString => ', valueString)
+        setDisplayValue(newArr.join(''))
     }
 
     function calculate() {
         let newValue = eval(displayValue)
         setDisplayValue(newValue)
         setValueArr([newValue])
-        console.log(eval(displayValue))
     }
+
+    function backKey() {
+        valueArr.pop()
+        setDisplayValue(valueArr.join(''))
+    }
+
 
 
     return ( 
