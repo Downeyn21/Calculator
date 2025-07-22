@@ -5,6 +5,8 @@ import Display from "./Display"
 function Keypad({setDisplayValue, displayValue}) {
     const [valueArr, setValueArr] = useState([])
 
+    const symbols = ['/', '*', '-', '+', '.']
+
     const keys = [
         {label: '/'},
         {label: '*'},
@@ -30,7 +32,19 @@ function Keypad({setDisplayValue, displayValue}) {
     ]
     
     function handleChange(key) {
+        let checkArr = valueArr[valueArr.length - 1]
+        
+        if (symbols.includes(key)) {
+            if (symbols.includes(checkArr)) {
+                valueArr.pop()
+                setDisplayValue(valueArr.join(''))
+            }
+        }
 
+        if(!(valueArr.some((item) => symbols.includes(item)))) {
+            console.log('check for .');
+            
+        }
 
         const newArr = [...valueArr, key]
         setValueArr(newArr)
