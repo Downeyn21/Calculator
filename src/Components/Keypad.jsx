@@ -32,6 +32,8 @@ function Keypad({setDisplayValue, displayValue}) {
     ]
     
     function handleChange(key) {
+        console.log(displayValue);
+        
         let checkArr = valueArr[valueArr.length - 1]
         
         if (symbols.includes(key)) {
@@ -41,9 +43,12 @@ function Keypad({setDisplayValue, displayValue}) {
             }
         }
 
-        if(!(valueArr.some((item) => symbols.includes(item)))) {
-            console.log('check for .');
-            
+        if(key === '.') {
+            let splitValues = displayValue.split(/[+\-*/]/)
+            let lastValue = splitValues[splitValues.length - 1]
+            if (lastValue.includes('.')) {
+                return
+            }
         }
 
         const newArr = [...valueArr, key]
