@@ -1,11 +1,22 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Display from "./Display"
+
+
 
 
 function Keypad({setDisplayValue, displayValue}) {
     const [valueArr, setValueArr] = useState([])
-
     const symbols = ['/', '*', '-', '+', '.']
+
+    useEffect(() => {
+        console.log('updated valueArr ', valueArr);
+        console.log('updated displayValue ', displayValue);
+        if (typeof valueArr[0] === 'number') {
+            console.log('hello =>', valueArr[0].length);
+        }
+        
+        
+    }, [valueArr, displayValue])
 
     const keys = [
         {label: '/'},
@@ -32,7 +43,6 @@ function Keypad({setDisplayValue, displayValue}) {
     ]
     
     function handleChange(key) {
-        console.log(displayValue);
         
         let checkArr = valueArr[valueArr.length - 1]
         
@@ -51,6 +61,13 @@ function Keypad({setDisplayValue, displayValue}) {
             }
         }
 
+        if (key === '<=') {
+            if(!displayValue) {
+                console.log('nothing to print');
+                
+            }
+        }
+
         const newArr = [...valueArr, key]
         setValueArr(newArr)
         setDisplayValue(newArr.join(''))
@@ -59,10 +76,22 @@ function Keypad({setDisplayValue, displayValue}) {
     function calculate() {
         let newValue = eval(displayValue)
         setDisplayValue(newValue)
-        setValueArr([newValue])
+        let digits = newValue.toString().split('').map(Number)
+        setValueArr(digits)
+        
     }
 
     function backKey() {
+        console.log('displayValue => ', displayValue.length);
+        if (displayValue === '0') {
+            return
+        } 
+        if(displayValue.length < 2){
+            console.log('set value');
+            setValueArr([])
+            setDisplayValue('0')
+            return
+        }
         valueArr.pop()
         setDisplayValue(valueArr.join(''))
     }

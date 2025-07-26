@@ -6,7 +6,6 @@ function Display({displayValue}) {
                 type="text" 
                 readOnly
                 value={displayValue}
-                
             />
             </div>
         </>
